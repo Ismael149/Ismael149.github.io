@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>❤️</title>
+  <title>Feliz San Valentin❤️</title>
   <style>
     canvas {
       position: absolute;
@@ -237,6 +237,9 @@
     musica.play().catch(error => {
       console.log("La reproducción automática fue bloqueada. Haz clic en la página para reproducir.");
     });
+        // Permitir la reproducción de música al hacer clic en la página
+    document.addEventListener('click', () => {
+      musica.play();
 
 
   </script>
