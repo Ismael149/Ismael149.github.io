@@ -14,11 +14,33 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.2);
     }
+    #texto {
+      font-family: "Comic Sans MS", "Comic Sans", cursive;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      text-align: center;
+      color: white;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
   <canvas id="heart"></canvas>
+  <div id="texto"></div> <!-- Aquí se mostrará el texto que cambia -->
+
+  <!-- Elemento de audio para la música -->
+  <audio id="musica" loop>
+    <source src="Maelo_Ruiz.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+
   <script>
+    // Código del corazón (original)
     window.requestAnimationFrame =
       window.__requestAnimationFrame ||
       window.requestAnimationFrame ||
@@ -57,10 +79,10 @@
       ctx.fillRect(0, 0, width, height);
 
       var drawText = function () {
-        ctx.font = "60px Arial"; 
+        ctx.font = "60px Arial";
         ctx.fillStyle = "lightblue";
         ctx.textAlign = "center";
-        ctx.fillText("", width / 2, height / 2.2 + 400); 
+        ctx.fillText("", width / 2, height / 2.2 + 400);
       };
 
       var heartPosition = function (rad) {
@@ -90,11 +112,11 @@
       var pointsOrigin = [];
       var dr = mobile ? 0.3 : 0.1;
       for (var i = 0; i < Math.PI * 2; i += dr)
-        pointsOrigin.push(scaleAndTranslate(heartPosition(i), 310, 19, 0, 0)); 
+        pointsOrigin.push(scaleAndTranslate(heartPosition(i), 310, 19, 0, 0));
       for (var i = 0; i < Math.PI * 2; i += dr)
-        pointsOrigin.push(scaleAndTranslate(heartPosition(i), 250, 15, 0, 0)); 
+        pointsOrigin.push(scaleAndTranslate(heartPosition(i), 250, 15, 0, 0));
       for (var i = 0; i < Math.PI * 2; i += dr)
-        pointsOrigin.push(scaleAndTranslate(heartPosition(i), 190, 11, 0, 0)); 
+        pointsOrigin.push(scaleAndTranslate(heartPosition(i), 190, 11, 0, 0));
 
       var heartPointsCount = pointsOrigin.length;
       var targetPoints = [];
@@ -181,6 +203,42 @@
     var s = document.readyState;
     if (s === "complete" || s === "loaded" || s === "interactive") init();
     else document.addEventListener("DOMContentLoaded", init);
+
+    // Código para el texto que cambia
+    const textos = [
+      "🌷✨",
+    "Creo que el motivo por el cual me aferro tanto a ti es porque....",
+      "Eres la única niña que ha entrado a mi corazón realmente",
+      "Y que ha sacado ese lado bonito de mí que creía que ya no existía...",
+      "Y si hago cosas por ti...",
+      "Es para que sepas que te quiero."
+    ];
+
+    let indice = 0;
+    const elementoTexto = document.getElementById('texto');
+
+    function cambiarTexto() {
+      elementoTexto.style.opacity = 0; // Oculta el texto actual
+      setTimeout(() => {
+        elementoTexto.textContent = textos[indice]; // Cambia el texto
+        elementoTexto.style.opacity = 1; // Muestra el nuevo texto
+        indice = (indice + 1) % textos.length; // Avanza al siguiente texto
+      }, 2000); // Espera 1 segundo para cambiar el texto
+    }
+
+    setInterval(cambiarTexto, 8000); // Cambia el texto cada 5 segundos
+
+    // Mostrar el primer texto inmediatamente
+    elementoTexto.textContent = textos[indice];
+    indice = 1;
+
+    // Reproducir la música en bucle
+    const musica = document.getElementById('musica');
+    musica.play().catch(error => {
+      console.log("La reproducción automática fue bloqueada. Haz clic en la página para reproducir.");
+    });
+
+
   </script>
 </body>
 </html>
