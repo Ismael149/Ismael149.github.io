@@ -207,7 +207,7 @@
     // Código para el texto que cambia
     const textos = [
       "🌷✨",
-    "Creo que el motivo por el cual me aferro tanto a ti es porque....",
+      "Creo que el motivo por el cual me aferro tanto a ti es porque....",
       "Eres la única niña que ha entrado a mi corazón realmente",
       "Y que ha sacado ese lado bonito de mí que creía que ya no existía...",
       "Y si hago cosas por ti...",
@@ -223,10 +223,10 @@
         elementoTexto.textContent = textos[indice]; // Cambia el texto
         elementoTexto.style.opacity = 1; // Muestra el nuevo texto
         indice = (indice + 1) % textos.length; // Avanza al siguiente texto
-      }, 2000); // Espera 1 segundo para cambiar el texto
+      }, 2000); // Espera 2 segundos para cambiar el texto
     }
 
-    setInterval(cambiarTexto, 8000); // Cambia el texto cada 5 segundos
+    setInterval(cambiarTexto, 8000); // Cambia el texto cada 8 segundos
 
     // Mostrar el primer texto inmediatamente
     elementoTexto.textContent = textos[indice];
@@ -237,10 +237,11 @@
     musica.play().catch(error => {
       console.log("La reproducción automática fue bloqueada. Haz clic en la página para reproducir.");
     });
-        // Permitir la reproducción de música al hacer clic en la págin
+
+    // Permitir la reproducción de música al hacer clic en la página
+    document.addEventListener('click', () => {
       musica.play();
-
-
+    });
   </script>
 </body>
 </html>
